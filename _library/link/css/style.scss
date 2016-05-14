@@ -1,0 +1,789 @@
+//////////////////////////////////////////////////
+/* ———————————— BRAND COLORS/SETUP ———————————— */
+//////////////////////////////////////////////////
+
+/*—————*///DESIGNER COLOR
+$color_ninyo: #2d9ad2;
+
+/*—————*///BRAND COLORS
+$color_brand_primary: #d6b52c;
+// $color_brand_secondary 
+$color_brand_primary_dark: #4e4300;
+
+/*—————*///VALUE COLORS
+$color_ghost: #e9e9e9;
+$color_shade: #2b2727;
+$color_white: #FFF;
+$color_ash: #b2b3b3;
+$color_black: #1a1717;
+$color_darkwhite: #edeae3;
+
+/*—————*///TYPOGRAPHY COLORS
+$color_h1_onlight: $color_shade;
+$color_h1_ondark: $color_brand_primary;
+$color_p_onlight: $color_shade;
+$color_p_ondark: $color_white;
+
+/*—————*///COPYRIGHT SECTION COLORS
+$bg_copyright: $color_shade;
+$color_copyright: $color_brand_primary;
+
+/*—————*///SOCIAL COLORS
+$color_vimeo:#1ab7ea;
+$color_snapchat:#fffc01;
+$color_instagram:#2a5b83;
+$color_facebook:#4b6daa;
+$color_twitter:#659fcb;
+$color_fyuse:#f99805;
+
+@mixin use_fira {
+	font-family: 'Fira Sans', sans-serif;
+	}
+
+//////////////////////////////////////////////////
+/* —————————————————— GLOBAL —————————————————— */
+//////////////////////////////////////////////////
+
+$tablet_body: 760px;
+$desktop_body: 1080px;
+
+@mixin section { // section wrap the full width of viewport
+	width:100%;
+	padding-top:50px;
+	padding-bottom:68px;
+	background-color:$color_ghost;
+	@media screen and (min-width: $tablet_body) {
+		padding-top:56px;
+		padding-bottom:78px;
+		}
+	@media screen and (min-width: $desktop_body) {
+		padding-top:60px;
+		padding-bottom:100px;
+		}
+	}
+.section {@include section;}
+
+@mixin inner { // inner contains contents inside section using dynamic margins dependant on viewport width
+	margin:0 auto;
+	width:93.066666666667%; // 375px viewport width using 345px body using 15px left & right margins
+	text-align:center;
+	@media screen and (min-width: $tablet_body) {width:84.473684210526%;} // 760px viewport width using 642px body using 59px left & right margins
+	@media screen and (min-width: $desktop_body) {width:83.333333333333%;} // 1440px viewport width using 1200px body using 120px left & right margins
+	}
+.inner {@include inner;}
+
+@mixin inner_block { // inner_block is used to make small amount of text create more lines than one
+	margin:0 auto;
+	width:93.066666666667%; // 375px viewport width using 345px body using 15px left & right margins
+	@media screen and (min-width: $tablet_body) {width:75%;} // 760px viewport width using 642px body using 59px left & right margins
+	@media screen and (min-width: $desktop_body) {width:60%;} // 1440px viewport width using 1200px body using 120px left & right margins
+	}
+.inner_block {@include inner_block;}
+
+@mixin vertical_center {
+	&:before {
+	    content: "";
+	    display: inline-block;
+	    vertical-align: middle;
+	    height: 100%;
+		}
+	}
+
+@mixin header_main {
+	text-align:center;
+	background-size:cover;
+	background-repeat:no-repeat;
+	height:100vh;
+	@include vertical_center;
+	}
+
+@mixin header_short { // if header, then place inside .section wrapper
+	display:block;
+	background-size:cover;
+	background-repeat:no-repeat;
+	height:140px;
+	text-align:center;
+	@include vertical_center;
+	@media screen and (min-width: $tablet_body) {height:200px;}
+	@media screen and (min-width: $desktop_body) {height:260px;}
+	}
+
+.header_short {@include header_short}
+
+.text_appear { // if mobile, then text is hidden. text will appear on tablet, and desktop
+	display:none;
+	@media screen and (min-width: $tablet_body) {display:inline-block;}
+	@media screen and (min-width: $desktop_body) {display:inline-block;}
+	}
+
+p.bottom {
+	margin-bottom:40px;
+	@media screen and (min-width: $tablet_body) {margin-bottom:40px;}
+	@media screen and (min-width: $desktop_body) {margin-bottom:40px;}
+	}
+
+.group_center {
+	display:inline-block;
+	text-align:center;
+	vertical-align: middle;
+	}
+
+.list_center {
+	border-top:1px solid lighten(#999, 20%);padding-top:20px;
+	width:77%;
+	margin:0 auto ;
+    margin-top:30px;
+    margin-bottom:0px;
+    text-align:center;
+    div {
+    	display:block;
+    	margin: 0 auto;
+    	width:13px;
+    	height:10px;
+    	margin-bottom: 26px;
+    	}
+    li {
+    	margin-bottom:3px;
+		&:last-child {margin-right:0;}
+	    @media screen and (min-width: $tablet_body) {}
+		@media screen and (min-width: $desktop_body) {display:inline-block;margin-right:20px;}
+		}
+	}
+
+//////////////////////////////////////////////////
+/* —————————————— GLOBAL MIXIN ———————————————— */
+//////////////////////////////////////////////////
+
+@mixin vp($name, $value) {@each $vendor in ('-webkit-', '-moz-', '-ms-', '-o-', '') {#{$vendor}#{$name}: #{$value};}}
+@mixin hide {height:0;opacity:0;}
+@mixin unhide {height:initial;opacity:1;}
+@mixin reset {margin:0;padding:0;list-style-type:none;text-decoration:none;} 
+@mixin clearfix {&:after {content: "";display: table;clear: both;}}
+
+@mixin mobile_1 { // body width = 345px, column width = 171, space = 3px
+	height:210px;
+	width:100%;
+	}
+@mixin mobile_2 { // body width = 345px, column width = 171, space = 3px
+	height:150px;
+	width:49.565217391304%;
+	}
+@mixin mobile_space { // space = 3px
+	margin-right:0.869565217391%;
+	}
+/*-----*/	
+@mixin tablet_2 { // body width = 642px, column width = 319px, space = 4px
+	height:210px;
+	width:49.688473520249%;
+	}
+@mixin tablet_3 { // body width = 642px, column width = 396.667px, space = 4px
+	height:190px;
+	width:32.917912772586%;
+	}
+@mixin tablet_space { // space = 4px
+	margin-right:0.623052959502%;
+	}
+/*-----*/
+@mixin desktop_2 { // body width = 1200px, column width = 597.5px, space = 5px
+	height:373px;
+	width:49.791666666667%;
+	}
+@mixin desktop_3 { // body width = 1200px, column width = 393.333px, space = 5px 
+	height:273px;
+	width:33.055583333333%;
+	}
+@mixin desktop_space { // space = 5px
+	margin-right:0.416666666667%;
+	}
+
+@mixin grid { // this will be added to all list-item grids
+	@include clearfix;
+	li {
+		//$mobile_body below
+		@include vp('transition','.25s');
+		@include vp('border-radius', '2px');
+		background:white; 
+		float:left;
+		margin-bottom:3px;
+		background-size:cover;
+		background-position:center;
+		background-repeat:no-repeat;
+
+		@media screen and (min-width: $tablet_body) {
+			margin-bottom:4px;
+			@include tablet_space;
+			}
+		@media screen and (min-width: $desktop_body) {
+			margin-bottom:5px;
+			@include desktop_space;
+			}
+		}
+	}
+@mixin grid_1_1_1 { // use this if(count($project[url_visual]) == 1){@include grid_1_1_1}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_1;
+		@media screen and (min-width: $tablet_body) {
+			width:100%;
+			height:316px;
+			margin-right:0%;
+			}
+		@media screen and (min-width: $desktop_body) {
+			width:100%;
+			height:600px;
+			margin-right:0%;
+			}
+		}
+	}
+@mixin grid_1_2_2 { // use this if(count($project[url_visual]) == 2){@include grid_1_2_2}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_1;
+		@media screen and (min-width: $tablet_body) {
+			@include tablet_2;
+			&:nth-child(2n+2){margin-right:0%;}
+			}
+		@media screen and (min-width: $desktop_body) {
+			@include desktop_2;
+			&:nth-child(2n+2){margin-right:0%}
+			}
+		}
+	}
+@mixin grid_1_3_3 { // use this if(count($project[url_visual]) == 3){@include grid_1_3_3}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_1;
+		@media screen and (min-width: $tablet_body) {
+			@include tablet_3;
+			&:nth-child(3n+3){margin-right:0;}
+			}
+		@media screen and (min-width: $desktop_body) {
+			@include desktop_3;
+			&:nth-child(3n+3){margin-right:0;}
+			}
+		}
+	}
+@mixin grid_2_2_2 { // use this if(count($project[url_visual]) == 4){@include grid_2_2_2}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_2;
+		@include mobile_space;
+		&:nth-child(2n+2){margin-right:0;}	
+		@media screen and (min-width: $tablet_body) {
+			@include tablet_2;
+			@include tablet_space;
+			}
+		@media screen and (min-width: $desktop_body) {
+			@include desktop_2;
+			@include desktop_space;
+			}
+		}
+	}
+@mixin grid_1_2_3 { // use this if(count($project[url_visual]) == 5){@include grid_1_2_2}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_1;
+		@media screen and (min-width: $tablet_body) {
+			@include tablet_2;
+			&:nth-child(2n+2){margin-right:0%;}
+			}
+		@media screen and (min-width: $desktop_body) {
+			@include desktop_3;
+			&:nth-child(2n+2){@include desktop_space}
+			&:nth-child(3n+3){margin-right:0;}
+			}
+		}
+	}
+@mixin grid_2_3_3 { // use this if(count($project[url_visual]) == 6){@include grid_2_3_3}
+	@include grid;
+	li {
+		//$mobile_body below
+		@include mobile_2;
+		@include mobile_space;
+		&:nth-child(2n+2){margin-right:0;}
+		@media screen and (min-width: $tablet_body) {
+			@include tablet_3;
+			@include tablet_space;
+			&:nth-child(2n+2){@include tablet_space;}
+			&:nth-child(3n+3){margin-right:0;}
+			}
+		@media screen and (min-width: $desktop_body) {
+			@include desktop_3;
+			@include desktop_space;
+			&:nth-child(2n+2){@include desktop_space;}
+			&:nth-child(3n+3){margin-right:0;}		
+			}
+		}
+	}
+@mixin reset_button {
+	@include reset;
+	@include vp('border-radius','2px');
+	@include use_fira;
+	@include vp('transition','.125s');
+	font-weight:500;
+	background-color:transparent;
+	border:0;
+	font-size:14px;
+	text-transform:uppercase;
+	color:$color_brand_primary;
+	letter-spacing: 0.15em;
+	padding:8px 27px;
+	border:2px solid $color_brand_primary;
+	display:inline-block;
+	&:hover {
+		background:$color_brand_primary;
+		color:white;
+		}
+	}
+.grid_1_1_1 {@include grid_1_1_1}
+.grid_1_2_2 {@include grid_1_2_2}
+.grid_1_3_3 {@include grid_1_3_3}
+.grid_2_2_2 {@include grid_2_2_2}
+.grid_1_2_3 {@include grid_1_2_3}
+.grid_2_3_3 {@include grid_2_3_3}
+
+@mixin grayscale_tocolor {
+	li {
+		@media screen and (min-width: $desktop_body) {
+			@include vp('filter','grayscale(100%)');
+			&:hover {@include vp('filter','grayscale(0%)');}
+			}
+		}
+	}
+
+@mixin section_copyright {
+	@include use_fira;
+	background:black;
+	padding:20px;
+	width:100%;
+	text-align:center;
+	p {
+		font-size:0.9em;
+		color:lighten($color_shade,10%);
+		a {
+			@include vp('transition','.25s');
+			text-decoration:none;
+			color:lighten($color_shade,10%);
+			&:hover {
+				color:$color_ninyo;
+				}
+			}
+		}
+	}	
+
+//////////////////////////////////////////////////
+/* —————————————————— SOCIAL —————————————————— */
+//////////////////////////////////////////////////
+
+.common_social {
+	@include vp('transition','.25s');
+	background-image:url(_library/img/asset/ico_sprite_social.svg);
+	background-size:500%;
+	&:hover {
+		background-position-y: 60px;
+		}
+	}
+
+.vimeo {
+	@extend .common_social;
+	background-position-x: -90px;
+	&:hover {
+		background-color:$color_vimeo;
+		}
+	}
+.snapchat {
+	@extend .common_social;
+	background-position-x: -60px;
+	&:hover {
+		background-color:$color_snapchat;
+		}
+	}
+.instagram {
+	@extend .common_social;
+	background-position-x: 0px;
+	&:hover {
+		background-color:$color_instagram;
+		}
+	}
+.facebook {
+	@extend .common_social;
+	background-position-x: -30px;
+	&:hover {
+		background-color:$color_facebook;
+		}
+	}
+.twitter {
+	@extend .common_social;
+	background-position-x: -120px;
+	&:hover {
+		background-color:$color_twitter;
+		}
+	}
+.fyuse {
+	@extend .common_social;
+	background-position-x: 0px;
+	&:hover {
+		background-color:$color_fyuse;
+		}
+	}
+.soundcloud {}
+
+//////////////////////////////////////////////////
+/* ——————————————— TYPOGRAPHY ————————————————— */
+//////////////////////////////////////////////////
+
+h1 { // Large header text
+	@include reset;
+	@include vp('transition','.25s');
+	@include use_fira;
+	color:$color_shade;
+	font-weight:500;
+	font-size:23px;
+	line-height:28px;
+	text-transform:uppercase;
+	text-align:center;
+	margin-bottom:18px;
+	
+	@media screen and (min-width: $tablet_body) {
+		font-size:30px;
+		line-height:31px;
+		margin-bottom:23px;
+		}
+	@media screen and (min-width: $desktop_body) {
+		font-size:40px;
+		line-height:40px;
+		margin-bottom:32px;
+		}
+	}
+
+h2 { // Large copy text usually placed underneath header, followed by text
+	@include reset;
+	@include vp('transition','.25s');
+	@include use_fira;
+	color:$color_brand_primary;
+	font-weight:normal;
+	padding-top:33px;
+	font-size:25px;
+	line-height:29px;
+	padding-bottom:23px;
+	text-align:center;
+	@media screen and (min-width: $tablet_body) {
+		padding-top:57px;
+		font-size:28px;
+		line-height:32px;
+		padding-bottom:24px;
+		}
+	@media screen and (min-width: $desktop_body) {
+		padding-top:54px;
+		font-size:31px;
+		line-height:37px;
+		padding-bottom:25px;
+		}
+	}
+
+h3 { // text that is about the same size as paragraph, accept holds more weight
+	@include reset;
+	@include vp('transition','.25s');
+	@include use_fira;
+	color:$color_shade;
+	font-weight:500;
+	font-size: 16px;
+	margin-bottom: 7px;
+	}
+
+p {
+	@include reset;
+	@include vp('transition','.25s');
+	@include use_fira;
+	color:$color_shade;
+	font-weight: 200;
+	font-size: 14px;
+	line-height: 25px; 
+	text-align:center;
+
+	@media screen and (min-width: $tablet_body) {
+		font-size:15px;
+		line-height:28px;
+		}
+	@media screen and (min-width: $desktop_body) {
+		font-size:16px;
+		line-height:30px;
+		}
+	}
+
+p.label {}
+
+//////////////////////////////////////////////////
+/* —————————————————— RESET ——————————————————— */
+//////////////////////////////////////////////////
+
+* {
+	margin:0;padding:0;
+	text-decoration:none;
+	list-style-type:none;
+	@include vp('box-sizing','border-box');
+	}
+
+//////////////////////////////////////////////////
+/* ———————————— DESIGN COMPONENTS ————————————— */
+//////////////////////////////////////////////////
+
+@mixin logo_primary {
+	display:inline-block;
+	vertical-align: middle;
+	background-image:url(_library/img/asset/gfx_logo_primary.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:90%;
+	width:264px;
+	height:81px;
+	margin-bottom:50px;
+	@media screen and (min-width: $tablet_body) {width:464px;height:144px;} // 760px viewport width using 642px body using 59px left & right margins
+	@media screen and (min-width: $desktop_body) {width:464px;height:144px} // 1440px viewport width using 1200px body using 120px left & right margins
+	}
+@mixin logo_interior {
+	display:inline-block;
+	vertical-align: middle;
+	background-image:url(_library/img/asset/gfx_logo_primary.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:60%;
+	width:287px;
+	height:80px;
+	@media screen and (min-width: $tablet_body) {background-size:70%;} 
+	@media screen and (min-width: $desktop_body) {background-size:90%;}
+	}
+.logo_interior {
+	@include logo_interior;
+	}
+@mixin logo_footer {
+	display:inline-block;
+	background-image:url(_library/img/asset/gfx_logo_footer.png);
+	background-position:center;
+	background-repeat:no-repeat;
+	background-size:84%;
+	width:235px;
+	height:65px;
+	margin-bottom:30px;
+	color:$color_brand_primary_dark;
+	}
+@mixin logo_navigation {}
+@mixin style_label_line {
+	text-align:center;
+	margin-top:-15px;
+    margin-bottom:10px;
+    font-weight:300;
+	font-size:16px;
+	@media screen and (min-width: $desktop_body) {margin-top:-29px;}
+
+	div.line {
+		display:inline-block;
+		height:3px;
+		margin-bottom:4px;
+		background:$color_brand_primary;
+		width:24pt;
+		@media screen and (min-width: $tablet_body) {
+			width:40pt;
+			}
+		@media screen and (min-width: $desktop_body) {
+			width:65px;
+			}
+		}
+	p.below {
+		display:inline-block;
+		margin-left:15px;
+		margin-right:15px;
+		font-style:italic;
+		}
+	}
+@mixin style_button {
+	@include vp('transition','.125s');
+	@include vp('border-radius','2px');
+	@include use_fira;
+	vertical-align: middle;
+	color:white;
+	background:$color_brand_primary;
+	padding:11px 30px;
+	font-weight:400;
+	font-size:14px;
+	border:0;
+	margin:auto;
+	display:inline-block;
+	margin-top:28px;
+	margin-bottom:54px;
+	&:hover {
+		background-color:darken($color_brand_primary,5%);
+		}
+	}
+
+.style_button {@include style_button;}
+
+.underline {
+	width:40px;
+	height:3px;
+	background:$color_brand_primary; 
+	margin-top:0px; 
+	margin-bottom:15px;
+	}
+
+.separator {
+	width:100%;
+	@include vp('border-radius','2px');
+	height:5px;
+    margin-top:-53px;
+    margin-bottom:54px;
+	background:$color_brand_primary;
+	@media screen and (min-width: $tablet_body) {
+	    margin-top: -58px;
+	    margin-bottom: 48px;
+		}
+	@media screen and (min-width: $desktop_body) {
+	    margin-top: -62px;
+	    margin-bottom: 46px;
+		}
+	}
+
+.title_primary {
+	margin-top:-19px;
+	@media screen and (min-width: $tablet_body) {margin-top:0;}
+	@media screen and (min-width: $desktop_body) {margin-top:0;}
+	}
+
+//////////////////////////////////////////////////
+/* ————–––––———————— CSS MAIN —–––––——————————— */
+//////////////////////////////////////////////////
+
+
+.style_label_line {
+	@include style_label_line;
+	}
+
+.cover {
+	@include vp('border-radius','2px 2px 0 0');
+	background-position:center; 
+	background-repeat:no-repeat;
+	background-size:cover;
+	width:100%;
+	height:270px;
+	@media screen and (min-width: $tablet_body) {
+		height:450px;
+		}
+	@media screen and (min-width: $desktop_body) {
+		height:600px;
+		}
+	}
+#details {
+	@include vp('border-radius','0 0 2px 2px');
+	background-color:white;
+	padding:15px;
+	margin-bottom:20px;
+	text-align:left;
+	@media screen and (min-width: $tablet_body) {padding:20px}
+	@media screen and (min-width: $desktop_body) {padding:30px}
+	.description {
+		text-align:left;
+		}
+	}
+#recent_project {
+	background-color:$color_darkwhite !important;
+	h1 {color:$color_shade}
+	p {color:$color_shade;}
+	}	
+#footer {
+	background-color:$color_brand_primary;
+	text-align:center;
+	.logo_footer {
+		@include logo_footer;
+		}
+	}
+.grayscale_tocolor {
+	@include grayscale_tocolor;
+	}
+.header_main {
+	@include header_main;
+	.group_center {
+		.logo_primary {
+			@include logo_primary;
+			}
+		p {margin-bottom:32px}
+		a {
+			@include reset_button;
+			}
+		}
+	}
+.button_single {
+	@include reset_button;
+	display:inline-block;
+	margin-bottom:50px;
+	@media screen and (min-width: $tablet_body) {margin-bottom:56px}
+	@media screen and (min-width: $desktop_body) {margin-bottom:67px}
+	}
+
+.display_projects_text {
+	margin-top:10px;
+	width:100%;
+	position:relative;
+	text-align:center;
+	background:white; 
+	overflow:auto;
+	padding:20px;
+	a.button_wtext {
+		@include reset_button;
+		color:$color_shade;
+		border-color:$color_shade;
+		display:inline-block;
+		margin-bottom: 20px;
+		&:hover {
+			border-color:$color_brand_primary;
+			}
+		}
+	@media screen and (min-width: $desktop_body) {
+		a {
+			display:inline-block;
+			margin-bottom:0px !important;
+			margin-right:20px !important;
+			}
+		p {display:inline-block;}
+		}
+	}
+
+.between {
+	width:130px;
+	margin-right:10px;
+	margin-bottom:0px;
+	&:last-child {
+		margin-right:0;
+		}
+	}
+
+.section_copyright {@include section_copyright;}
+
+.nonmobile {
+	@include hide;
+	display:none !important;
+	@media screen and (min-width: $tablet_body) {
+		@include unhide;
+		display:inline-block !important;
+		}
+	@media screen and (min-width: $desktop_body) {
+		@include unhide;
+		display:inline-block !important;
+		}
+	}
+.mobile_only {
+	@include unhide;
+	display:inline-block !important;
+	@media screen and (min-width: $tablet_body) {
+		@include hide;
+		display:none !important;
+		}
+	@media screen and (min-width: $desktop_body) {
+		@include hide;
+		display:none !important;
+		}
+	}
