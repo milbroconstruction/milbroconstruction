@@ -173,10 +173,10 @@ function clipboard_container_grid(){
 				} // Close checking if display doesn't match with the string 'before'
 			$output = $output . '<div>';
 			if($match > 0){
-				$output = $output . '<a class="style_button between" href="project.php?id='.$previous.'">Previous</a>';
+				$output = $output . '<a id="prevLink" class="style_button between" href="project.php?id='.$previous.'">Previous</a>';
 				}
 			if($match < $total){
-				$output = $output . '<a class="style_button between" href="project.php?id='.$next.'">Next</a>';
+				$output = $output . '<a id="nextLink" class="style_button between" href="project.php?id='.$next.'">Next</a>';
 				}
 			$output = $output . '</div>';
 			} // Close conditional matching the current page with id
@@ -248,8 +248,8 @@ function landing_body(){
 		$output = $output . '<div class="group_center">';
 			$output = $output . '<div class="logo_primary"></div>';
 			$output = $output . '<p style="color:white;">Your dream home is only a remodel away.</p>';
-			$output = $output . '<a class="mobile_only" href="tel:360-277-7585">Call</a>';
-			$output = $output . '<a class="nonmobile" href="mailto:russell@milbroconstruction.com">E-mail</a>';
+			$output = $output . '<a style="margin-right:5px;" class="mobile_only" href="tel:360-277-7585">Call</a>';
+			$output = $output . '<a href="mailto:russell@milbroconstruction.com">E-mail</a>';
 		$output = $output . '</div>';
 	$output = $output . '</div>';
 	$output = $output . '<div class="section" style="background:white;">';
